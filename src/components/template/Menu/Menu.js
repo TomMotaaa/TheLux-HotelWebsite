@@ -1,8 +1,19 @@
+import React, { useEffect, useState } from 'react';
 import './Menu.css';
-import React from 'react';
 import { Link} from 'react-router-dom';
+import AuthService from '../../../Services/AuthService';
 
-function Menu() {
+function Menu(props) {
+
+    const [currentUser, setCurrentUser] = useState(undefined);
+
+    useEffect(() => {
+        const user = AuthService.getCurrentUser();
+        if (user) {
+            setCurrentUser(user);
+        }
+    }, []);
+
   return (
     <>
         <nav className='menu'>
@@ -12,9 +23,16 @@ function Menu() {
             <Link to='/crud'>
                 CRUD
             </Link>
-            <Link to='/login'>
-                Login
-            </Link>
+
+            {currentUser ? (
+                <Link to='/logout'>
+                    Logout
+                </Link>
+            ) : (
+                <Link to='/login'>
+                    Login
+                </Link>
+            )}
         </nav>
     </>
   )

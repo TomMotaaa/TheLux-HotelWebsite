@@ -33,7 +33,7 @@ namespace TheLux_API.Controllers
                 {
                     return NotFound();
                 }
-                return Ok(result);
+                return Ok();
             }
             catch {
                 return this.StatusCode(StatusCodes.Status500InternalServerError, "Falha no acesso ao banco de dados.");

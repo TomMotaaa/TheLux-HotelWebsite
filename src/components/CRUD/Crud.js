@@ -1,24 +1,41 @@
 import React, { Component } from 'react';
-import axios from 'axios';
 import './Crud.css';
 import Main from '../template/Main/Main';
+import UserService from '../../Services/UserService';
 
 const title = "Cadastro de Hotéis";
 
 const urlAPI = "http://localhost:5027/api/hotel";
 const initialState = {
     hotel: { id: 0, nome: '', qtdEstrelas: 0, localizacao: '', qtdQuartos: 0, preco: 0},
-    lista: []
+    lista: [],
+    mens: []
 }
+
+
 
 export default class Crud extends Component {
 
     state = {...initialState}
 
     componentDidMount() {
-        axios(urlAPI).then(resp => {
-            this.setState({ lista: resp.data })
-        })
+        UserService.getAdminBoardCrud().then(
+            (response) => {
+                console.log('useEffect getAdminBoard: ' + response.data)
+                if (this.state.mens != null)
+                    this.setState({ lista: response.data, mens: null })
+            },
+            (error) => {
+                const _mens =
+                    (error.response &&
+                        error.response.data &&
+                        error.response.data.message) ||
+                    error.message ||
+                    error.toString()
+                this.setState({mens: _mens})
+                console.log('_mens: ' + _mens)
+            }
+        )
     }
 
     limpar() {
@@ -33,7 +50,7 @@ export default class Crud extends Component {
         const metodo = hotel.id ? 'put' : 'post';
         const url = hotel.id ? `${urlAPI}/${hotel.id}` : urlAPI;
 
-        axios[metodo](url, hotel)
+        UserService.salvarCrud(metodo, url, hotel)
             .then(resp => {
                 const lista = this.getListaAtualizada(resp.data);
                 this.setState({ hotel: initialState.hotel, lista })
@@ -57,11 +74,10 @@ export default class Crud extends Component {
     }
 
     remover(hotel) {
-        const url = urlAPI + "/" + hotel.id;
         if (window.confirm("Confirma remoção do hotel: " + hotel.nome)) {
             console.log("entrou no confirm");
 
-            axios['delete'](url, hotel)
+            UserService.deletarCrud(hotel.id)
                 .then(resp => {
                     const lista = this.getListaAtualizada(hotel, false)
                     this.setState({hotel: initialState.hotel, lista})
@@ -178,8 +194,14 @@ export default class Crud extends Component {
     render() {
         return (
             <Main title={title}>
-                {this.renderForm()}
-                {this.renderTable()}
+                {console.log(this.state.mens)}
+                {
+                    (this.state.mens != null) ? 'Problema com conexão ou autorização (contactar administrador).' :
+                    <>
+                        {this.renderForm()}
+                        {this.renderTable()}
+                    </> 
+                }
             </Main>
         )
     }

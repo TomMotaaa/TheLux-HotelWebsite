@@ -12,7 +12,7 @@ namespace TheLux_API.Controllers
 {
     [ApiController]
     [Route("/api/[controller]")]
-    public class HomeController
+    public class HomeController : ControllerBase
     {
         private readonly IConfiguration _configuration;
         private readonly HotelContext? _context;
@@ -32,7 +32,7 @@ namespace TheLux_API.Controllers
             u.senha == usuario.senha).FirstOrDefault();
 
             if (user == null) {
-                return Unauthorized("Usuário ou senha inválidos");
+                return Unauthorized();
             }
 
              var authClaims = new List<Claim> {
