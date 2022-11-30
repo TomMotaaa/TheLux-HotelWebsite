@@ -48,7 +48,7 @@ function Rotas() {
         />
 
         <Route path='/login' element={<Login />}/>
-        <Route path='/login' element={<Logout />}/>
+        <Route path='/logout' element={<Logout />}/>
 
         <Route path='*' to='/' />
 

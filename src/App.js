@@ -1,7 +1,6 @@
 import './App.css';
 
 import React from 'react'
-import Logo from './components/template/Logo/Logo';
 import Menu from './components/template/Menu/Menu';
 import Footer from './components/template/Footer/Footer';
 import Rotas from './Rotas';

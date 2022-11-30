@@ -39,15 +39,15 @@ function Login() {
         <h1 className='tituloAuth'>Login</h1>
         <section className='forms top'>
             <div className='sign-box'>
-                <form action='' onSubmit={handleSubmit} className='formLogin'>
+                <form onSubmit={handleSubmit} className='formLogin'>
                     <div>
                         <label className='lblLogin' htmlFor='username'>
-                            Nome:
+                            username:
                         </label>
                         <input 
                             type="text"
                             value={username}
-                            placeholder="Nome"
+                            placeholder="username"
                             className="inputAuth"
                             onChange={({target}) => {
                                 setUsername(target.value)
@@ -57,12 +57,12 @@ function Login() {
                     </div>
                     <div>
                         <label className='lblLogin' htmlFor='senha'>
-                            Senha
+                            senha:
                         </label>
                         <input 
                             type="password"
                             value={password}
-                            placeholder="Senha"
+                            placeholder="senha"
                             className="inputAuth"
                             onChange={({target}) => {
                                 setPassword(target.value)

@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import './Crud.css';
 import Main from '../template/Main/Main';
 import UserService from '../../Services/UserService';
+import axios from 'axios';
 
 const title = "Cadastro de Hotéis";
 
@@ -11,6 +12,8 @@ const initialState = {
     lista: [],
     mens: []
 }
+
+const user = JSON.parse(localStorage.getItem('user'))
 
 
 
@@ -50,7 +53,7 @@ export default class Crud extends Component {
         const metodo = hotel.id ? 'put' : 'post';
         const url = hotel.id ? `${urlAPI}/${hotel.id}` : urlAPI;
 
-        UserService.salvarCrud(metodo, url, hotel)
+        axios[metodo](url, hotel)
             .then(resp => {
                 const lista = this.getListaAtualizada(resp.data);
                 this.setState({ hotel: initialState.hotel, lista })
@@ -77,7 +80,7 @@ export default class Crud extends Component {
         if (window.confirm("Confirma remoção do hotel: " + hotel.nome)) {
             console.log("entrou no confirm");
 
-            UserService.deletarCrud(hotel.id)
+            axios['delete'](hotel.id)
                 .then(resp => {
                     const lista = this.getListaAtualizada(hotel, false)
                     this.setState({hotel: initialState.hotel, lista})

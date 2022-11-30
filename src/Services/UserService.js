@@ -1,30 +1,35 @@
 import axios from 'axios';
-import Auth from './AuthService';
+import AuthService from './AuthService';
 
 const API_URL = 'http://localhost:5027/api/';
 
+const user = JSON.parse(localStorage.getItem('user'))
+
 const getPublicContent = () => {
-     //return axios.get(API_URL + 'home')
+    return axios.get(API_URL + 'home')
 };
+
+/*
 
 const getPublicHome = {
     getCrud: () => {
-        return axios.get(API_URL + 'home/crud');
+        return axios.get(API_URL + 'home');
     },
-};
+};*/
 
 const headerAuthorization = () => {
     return {
         headers: {
-            Authorization: 'Bearer ' + Auth.getCurrentUser().token
+            Authorization: 'Bearer ' + AuthService.getCurrentUser().token
         }
     }
 };
 
-const getAdminBoardCrud = async () => {
-    return await axios.get(API_URL + 'crud', headerAuthorization())
-};
 
+const getAdminBoardCrud = async () => {
+    return await axios.get(API_URL + 'hotel', {headers: {Authorization: 'Bearer ' + user.token }});
+};
+/*
 const salvarCrud = async (method, url, crud) => {
     return await axios[method](url, crud, headerAuthorization())
 };
@@ -32,13 +37,15 @@ const salvarCrud = async (method, url, crud) => {
 const deletarCrud = async (id) => {
     return await axios.delete(API_URL + 'crud/' + id, headerAuthorization())
 };
+*/
+
 
 const UserService = {
     getPublicContent,
-    getPublicHome,
-    getAdminBoardCrud: getAdminBoardCrud,
-    salvarCrud,
-    deletarCrud,
+    //getPublicHome,
+    getAdminBoardCrud//: getAdminBoardCrud,
+    //salvarCrud,
+    //deletarCrud,
 };
 
 export default UserService
