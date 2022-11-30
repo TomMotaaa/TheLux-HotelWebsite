@@ -1,10 +1,11 @@
 nav.menu {
     background-color: var(--bg-menu);;
-    position: sticky;
+    position: absolute;
     top: 0;
     z-index: 10;
     line-height: 10vh;
     text-align: center;
+    width: 100%;
 }
 
 .menu a{

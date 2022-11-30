@@ -37,40 +37,44 @@ function Login() {
   return (
     <div className='content'>
         <h1 className='tituloAuth'>Login</h1>
-        <form onSubmit={handleSubmit} className='formLogin'>
-            <div>
-                <label className='lblLogin' htmlFor='username'>
-                    E-mail:
-                </label>
-                <input 
-                    type="text"
-                    value={username}
-                    placeholder="Digite o e-mail"
-                    className="inputAuth"
-                    onChange={({target}) => {
-                        setUsername(target.value)
-                        setMessage('')
-                    }}
-                />
+        <section className='forms top'>
+            <div className='sign-box'>
+                <form action='' onSubmit={handleSubmit} className='formLogin'>
+                    <div>
+                        <label className='lblLogin' htmlFor='username'>
+                            Nome:
+                        </label>
+                        <input 
+                            type="text"
+                            value={username}
+                            placeholder="Nome"
+                            className="inputAuth"
+                            onChange={({target}) => {
+                                setUsername(target.value)
+                                setMessage('')
+                            }}
+                        />
+                    </div>
+                    <div>
+                        <label className='lblLogin' htmlFor='senha'>
+                            Senha
+                        </label>
+                        <input 
+                            type="password"
+                            value={password}
+                            placeholder="Senha"
+                            className="inputAuth"
+                            onChange={({target}) => {
+                                setPassword(target.value)
+                                setMessage('')
+                            }}
+                        />
+                    </div>
+                    <button type='submit'>Entrar</button>
+                    <h4 className='msgErro'>{message}</h4>
+                </form>
             </div>
-            <div>
-                <label className='lblLogin' htmlFor='senha'>
-                    Senha
-                </label>
-                <input 
-                    type="password"
-                    value={password}
-                    placeholder="Digite o senha"
-                    className="inputAuth"
-                    onChange={({target}) => {
-                        setPassword(target.value)
-                        setMessage('')
-                    }}
-                />
-            </div>
-            <button type='submit'>Entrar</button>
-            <h4 className='msgErro'>{message}</h4>
-        </form>
+        </section>
     </div>
   )
 }

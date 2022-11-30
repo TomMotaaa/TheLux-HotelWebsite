@@ -23,6 +23,6 @@ namespace TheLux_API.Data
         }
 
          public DbSet<Hotel>? Hotel {get; set;}
-         public DbSet<User>? Usuario { get; set; }
+         public DbSet<User>? UsuarioHotel { get; set; }
     }
 }

@@ -28,7 +28,7 @@ namespace TheLux_API.Controllers
         [AllowAnonymous]
         public ActionResult<dynamic> Login ([FromBody] User usuario)
         {
-            var user = _context.Usuario.Where(u => u.username == usuario.username && 
+            var user = _context.UsuarioHotel.Where(u => u.username == usuario.username && 
             u.senha == usuario.senha).FirstOrDefault();
 
             if (user == null) {

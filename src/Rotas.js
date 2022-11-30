@@ -6,6 +6,7 @@ import Crud from './components/CRUD/Crud';
 import AuthService from './Services/AuthService';
 import Login from './components/Login/Login';
 import Logout from './components/Logout/Logout';
+import Home from './components/Home/Home';
 
 function Rotas() {
 
@@ -43,11 +44,7 @@ function Rotas() {
         )}
 
         <Route exact path='/home'
-            element={
-                <Main>
-                    <div>Galeria...</div>
-                </Main>
-            }
+            element={<Home />}
         />
 
         <Route path='/login' element={<Login />}/>
