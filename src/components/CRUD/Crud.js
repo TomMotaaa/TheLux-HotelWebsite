@@ -10,7 +10,7 @@ const urlAPI = "http://localhost:5027/api/hotel";
 const initialState = {
     hotel: { id: 0, nome: '', qtdEstrelas: 0, localizacao: '', qtdQuartos: 0, preco: 0},
     lista: [],
-    mens: []
+    mens: null
 }
 
 const user = JSON.parse(localStorage.getItem('user'))
@@ -24,9 +24,7 @@ export default class Crud extends Component {
     componentDidMount() {
         UserService.getAdminBoardCrud().then(
             (response) => {
-                console.log('useEffect getAdminBoard: ' + response.data)
-                if (this.state.mens != null)
-                    this.setState({ lista: response.data, mens: null })
+                this.setState({ lista: response.data })
             },
             (error) => {
                 const _mens =
@@ -77,11 +75,12 @@ export default class Crud extends Component {
     }
 
     remover(hotel) {
+        const url = urlAPI + '/' + hotel.id
         if (window.confirm("Confirma remoção do hotel: " + hotel.nome)) {
             console.log("entrou no confirm");
 
-            axios['delete'](hotel.id)
-                .then(resp => {
+            axios['delete'](url, hotel)
+                .then((resp) => {
                     const lista = this.getListaAtualizada(hotel, false)
                     this.setState({hotel: initialState.hotel, lista})
                 })
@@ -105,10 +104,10 @@ export default class Crud extends Component {
                 <label>Qtd Estrelas: </label>
                 <input 
                     type="number"
-                    id="qtdEstrela"
+                    id="qtdEstrelas"
                     placehoder="0"
                     className="form-input"
-                    name="qtdEstrela"
+                    name="qtdEstrelas"
                     value={this.state.hotel.qtdEstrelas}
                     onChange={ e => this.atualizaCampo(e)}
                 />
@@ -175,7 +174,7 @@ export default class Crud extends Component {
                                 <td>{hotel.qtdEstrelas}</td>
                                 <td>{hotel.localizacao}</td>
                                 <td>{hotel.qtdQuartos}</td>
-                                <td>{hotel.preco}</td>
+                                <td>R$ {hotel.preco},00</td>
                                 <td>
                                     <button className='btn-alterar' onClick={() => this.carregar(hotel)}>
                                         Alterar

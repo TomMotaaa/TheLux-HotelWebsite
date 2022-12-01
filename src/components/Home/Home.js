@@ -1,11 +1,9 @@
 import React, { Component } from "react";
 import './Home.css';
 import Main from "../template/Main/Main";
-import axios from "axios";
 import UserService from "../../Services/UserService";
 
 const title = 'Galeria de Hotéis';
-const urlAPI = 'http://localhost:5027/api/hotel';
 const infos = {
     hotel: {id: 0, nome: '', qtdEstrelas: '', localizacao: '', qtdQuartos: '', preco:'' },
     listaHotel: [],
@@ -19,7 +17,7 @@ export default class Home extends Component {
     componentDidMount() {
         UserService.getPublicContent().then(
             (response) => {
-                this.setState({ listaHotel: response.data})
+                this.setState({ listaGaleria: response.data})
             },
             (error) => {
                 const _mens =
@@ -36,14 +34,13 @@ export default class Home extends Component {
 
     getListaAtualizadaHoteis(evento) {
         const qtdEstrelas = evento.target.value
-        const lista = this.state.listaHotel.filter(a => a.qtdEstrelas == qtdEstrelas)
-        this.setState({listaGaleria: lista})
+        const listaHotel = this.state.listaHotel.filter(a => a.qtdEstrelas == qtdEstrelas)
+        this.setState({listaGaleria: listaHotel})
         this.setState({hotel: this.state.hotel})
     }
 
-    atualizaCampo(evento) {
+    atualizaCampo() {
         const hotel = {...this.state.hotel}
-        hotel[evento.target.name] = evento.target.value;
         this.setState({hotel})
     }
 
