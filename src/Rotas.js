@@ -23,9 +23,7 @@ function Rotas() {
     <Routes>
         <Route exact path='/'
             element={
-                <Main title="Bem-Vindo!">
-                    <div>Galeria e cadastro de Hotéis</div>
-                </Main>
+                <Home />
             }
         />
 
@@ -42,10 +40,6 @@ function Rotas() {
                 }
             />
         )}
-
-        <Route exact path='/home'
-            element={<Home />}
-        />
 
         <Route path='/login' element={<Login />}/>
         <Route path='/logout' element={<Logout />}/>

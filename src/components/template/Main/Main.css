@@ -2,6 +2,7 @@ div.content{
     width: 80%;
     height: 80%;
     margin: auto;
+    padding-left: 10px;
 }
 
 main > div {

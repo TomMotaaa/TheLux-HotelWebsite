@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router';
 import './Login.css';
+import Logo from "../../assets/images/logo.png";
 
 import AuthService from '../../Services/AuthService';
 
@@ -39,6 +40,9 @@ function Login() {
         <h1 className='tituloAuth'>Login</h1>
         <section className='forms top'>
             <div className='sign-box'>
+                <div className='logoLogin'>
+                    <img src={Logo} alt='logo'/>
+                </div>
                 <form onSubmit={handleSubmit} className='formLogin'>
                     <div>
                         <label className='lblLogin' htmlFor='username'>

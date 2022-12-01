@@ -13,7 +13,6 @@ const initialState = {
     mens: null
 }
 
-const user = JSON.parse(localStorage.getItem('user'))
 
 
 

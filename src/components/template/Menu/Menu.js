@@ -17,7 +17,7 @@ function Menu(props) {
   return (
     <>
         <nav className='menu'>
-            <Link to='/home'>
+            <Link to='/'>
                 Home
             </Link>
             <Link to='/crud'>

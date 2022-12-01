@@ -6,7 +6,7 @@ const API_URL = 'http://localhost:5027/api/';
 const user = JSON.parse(localStorage.getItem('user'))
 
 const getPublicContent = () => {
-    return axios.get(API_URL + 'hotel')
+    return axios.get(API_URL + '/');
 };
 
 /*

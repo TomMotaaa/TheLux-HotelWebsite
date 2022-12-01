@@ -1,75 +1,63 @@
-import React, { Component } from "react";
+import { useState, useEffect } from "react";
 import './Home.css';
 import Main from "../template/Main/Main";
-import UserService from "../../Services/UserService";
+import axios from "axios";
 
-const title = 'Galeria de Hotéis';
+const title = "Bem-vindo! Veja a galeria de Hotéis";
+const urlAPI = 'http://localhost:5027/api/hotel';
 const infos = {
-    hotel: {id: 0, nome: '', qtdEstrelas: '', localizacao: '', qtdQuartos: '', preco:'' },
-    listaHotel: [],
-    listaGaleria: [],
-    mens: [],
+    listaHotel: []
 }
 
-export default class Home extends Component {
-    state = {...infos}
+function Home(props) {
+  
+    const [listaHotel, setListaHotel] = useState(infos.listaHotel)
 
-    componentDidMount() {
-        UserService.getPublicContent().then(
-            (response) => {
-                this.setState({ listaGaleria: response.data})
-            },
-            (error) => {
-                const _mens =
-                    (error.response &&
-                        error.response.data &&
-                        error.response.data.message) ||
-                    error.message ||
-                    error.toString()
-                this.setState({mens: _mens})
-                console.log('_mens: ' + _mens)
-            }
-        )
+    const getHotelCadastrado = async (hotel) => {
+        return await axios(urlAPI)
+                        .then((resp) => {
+                            const listaHotel = resp.data
+                            return listaHotel.filter(
+                                a => a.id === hotel.id
+                            )
+                        })
     }
 
-    getListaAtualizadaHoteis(evento) {
-        const qtdEstrelas = evento.target.value
-        const listaHotel = this.state.listaHotel.filter(a => a.qtdEstrelas == qtdEstrelas)
-        this.setState({listaGaleria: listaHotel})
-        this.setState({hotel: this.state.hotel})
+    const atualizarHotel = async(evento) => {
+        const qtdEstrelas = evento.target.value;
+        if (evento.target.value === '') {
+            setListaHotel(infos.listaHotel)
+            return
+        }
+        listaHotel.qtdEstrelas = Number(qtdEstrelas)
+        const listaHoteis = await getHotelCadastrado(listaHotel.qtdEstrelas)
+        if (!Array.isArray(listaHoteis)) return;
+
+        setListaHotel(listaHotel)
     }
 
-    atualizaCampo() {
-        const hotel = {...this.state.hotel}
-        this.setState({hotel})
+    const renderCards = () => {
+        <div className="card-row">
+             {Array.isArray(listaHotel) && listaHotel.length > 0 ?
+            listaHotel.map((hotel) => (
+                <div key={hotel.id} className="card draw-border">
+                    <span className="card-titulo">{hotel.nome}</span>
+                    <span className="card-descricao">RA: {hotel.qtdEstrelas}</span>
+                    <span className="card-descricao"> Curso: {hotel.localizacao} </span>
+                    <span className="card-descricao"> Curso: {hotel.qtdQuartos} </span>
+                    <span className="card-descricao"> Curso: {hotel.preco} </span>
+                </div>
+            )) : null}
+        </div>
     }
 
-    Cards() {
-        return (
-            <div className="card-row">
-                {this.state.listaGaleria.map((hotel) => 
-                    <div key={hotel.id} className="card-descricao">
-                        <span>Nome: {hotel.nome} </span>
-                        <span>Quantidade de Estrelas: {hotel.qtdEstrelas} </span>
-                        <span>Localização: {hotel.localizacao} </span>
-                        <span>Quantidade de Quartos: {hotel.qtdQuartos} </span>
-                        <span>Preço: {hotel.preco} </span>
-                    </div> )}
-            </div>
-        )
-    }
-
-    render() {
-        return (
+    return (
+        <div className="container home">
             <Main title={title}>
-                {
-                    (this.state.mens != null) ? 'Problema com Conexão ou Autenticação' : 
-                    <>
-                        {this.Cards()}
-                    </>
-                }
+                {renderCards()}
             </Main>
-        )
-    }
+        </div>
+    )
 }
 
+export default Home
