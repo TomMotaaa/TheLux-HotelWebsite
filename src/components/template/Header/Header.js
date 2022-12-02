@@ -12,7 +12,7 @@ function Header(props) {
           </div>
         </header>
 
-        <h2>{props.title}</h2>
+        <h2 className='title'>{props.title}</h2>
     </>
   )
 }

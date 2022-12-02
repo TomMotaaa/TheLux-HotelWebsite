@@ -2,4 +2,13 @@ header {
     margin-bottom: 30px;
 }
 
+div.logo > img {
+    left: 200px;
+    position: relative;
+}
+
+.title {
+    margin-bottom: 20px
+}
+
 

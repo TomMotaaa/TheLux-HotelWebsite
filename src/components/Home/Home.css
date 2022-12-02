@@ -1,41 +1,8 @@
-@import url("https://fonts.googleapis.com/css2?family=Baloo+Paaji+2:wght@400;500&display=swap");
-
 div.home {
     width: 80%;
     height: 80%;
     margin: auto;
     grid-area: content;
-}
-
-div.home > main > div > div {
-    display: flex;
-    justify-content: flex-start;
-    flex-direction: row;
-    flex-wrap: wrap;
-    align-items: flex-start;
-    gap: 15px;
-}
-
-.select-container {
-    color: white;
-    margin: 20px;
-    border-radius: 5px;
-    background-color: #470af0;
-    padding: 10px;
-  
-    width: 92%;
-    border: 1.5px solid #bddff7;
-    border-collapse: collapse;
-}
-
-.selectHome{
-    font-family:'Times New Roman', Times, serif;
-    padding: 10px 15px 10px 10px;
-    font-size: 14px;
-}
-
-select .selectHotel option{
-    font-size: 12px;
 }
 
 .card-container {
@@ -53,7 +20,6 @@ select .selectHotel option{
     flex-wrap: wrap;
     align-items: center;
     justify-content: space-between;
-
     width: 100%;
 }
 
@@ -70,7 +36,7 @@ select .selectHotel option{
     align-self: normal;
     font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
     background-color: #470af0;
-    max-width: 15%;
+    max-width: 25%;
 
     border-radius: 1rem;
     overflow: hidden;
@@ -84,20 +50,13 @@ select .selectHotel option{
     margin: 10px 0 15px;
     max-width: 100%;
     text-align: center;
+    color: white;
 }
 
 .card-descricao {
     margin-bottom: 10px;
-}
-
-.card-imagem {
-    height: 160px;
-    max-height: 160px;
-    width: 160px;
-    border: 5px solid #acf2f5;
-    margin-top: 20px;
-    margin-bottom: 10px;
-    box-shadow: 0 7px 25px rgb(66, 112, 55);
+    color: white;
+    text-align: center;
 }
 
 .draw-border {
@@ -137,10 +96,6 @@ select .selectHotel option{
     color: rgb(253, 253, 253);
 }
 
-.draw-border:hover .card__image {
-    box-shadow: 0 7px 25px rgb(230, 57, 115);
-}
-
 .draw-border:hover::before,
 .draw-border:hover::after {
     border-color: rgb(0, 119, 255);
@@ -158,125 +113,4 @@ select .selectHotel option{
 .draw-border:hover::after {
     -webkit-transition-delay: 0s, 0.25s, 0s;
     transition-delay: 0s, 0.25s, 0s;
-}
-
-label {
-    padding: 10px;
-    font-family: 'Times New Roman', Times, serif;
-    font-weight: bold;
-}
-
-.gallery {
-    margin-bottom: 50px;
-}
-
-.gallery img {
-    transition: 0.5s;
-    width: 100%;
-    height: 100%;
-}
-
-.gallery .items {
-    padding: 15px;
-    border: 1px solid rgba(0, 0, 0, 0.1);
-    border-radius: 5px;
-    text-align: center;
-}
-
-.gallery h3 {
-    margin: 10px 0 10px 0;
-    font-weight: 400;
-}
-
-.gallery .img {
-    position: relative;
-    overflow: hidden;
-    width: 380px;
-    height: 252px;
-}
-
-.gallery i {
-    position: absolute;
-    top: 45%;
-    left: 45%;
-    z-index: 5;
-    font-size: 40px;
-    color: white;
-    opacity: 0;
-    transition: 0.5s ease-in-out;
-}
-
-.gallery .img::before {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 380px;
-    height: 252px;
-    z-index: 2;
-    background-color: rgba(0, 0, 0, 0.5);
-    opacity: 0;
-    transition: 0.5s ease-in-out;
-}
-
-.gallery .img::after {
-    content: "";
-    position: absolute;
-    top: 10px;
-    left: 10px;
-    width: 360px;
-    height: 232px;
-    z-index: 3;
-    border: 1px solid #31b675;
-    opacity: 0;
-    transition: 0.5s ease-in-out;
-}
-
-.gallery .items:hover img {
-    transform: scale(1.2);
-    cursor: pointer;
-}
-
-.gallery .items:hover i,
-.gallery .items:hover .img::after,
-.gallery .items:hover .img::before {
-  opacity: 1;
-  cursor: pointer;
-}
-
-.popup {
-    width: 100vw;
-    height: 100vh;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    position: fixed;
-    z-index: 8;
-}
-
-.hide {
-    width: 100vw;
-    height: 100vh;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background-color: rgba(0, 0, 0, 0.7);
-}
-
-.popup-content {
-    position: absolute;
-    top: 15%;
-    left: 20%;
-}
-
-.popup button {
-    background-color: #fff;
-    padding: 20px 20px;
-    color: #000;
-    position: absolute;
-    top: -7%;
-    right: -34.5%;
-    font-weight: bold;
 }

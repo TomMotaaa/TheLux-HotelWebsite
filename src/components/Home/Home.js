@@ -6,50 +6,35 @@ import axios from "axios";
 const title = "Bem-vindo! Veja a galeria de Hotéis";
 const urlAPI = 'http://localhost:5027/api/hotel';
 const infos = {
-    listaHotel: []
+    hotel: {id: 0, nome: '', qtdEstrelas: 0, localizacao: '', qtdQuartos: 0, preco: 0},
+    listaHotel: [],
 }
+ 
+ function Home() {
 
-function Home(props) {
-  
+    // eslint-disable-next-line
+    const [hotel, setHotel] = useState(infos.hotel)
     const [listaHotel, setListaHotel] = useState(infos.listaHotel)
 
-    const getHotelCadastrado = async (hotel) => {
-        return await axios(urlAPI)
-                        .then((resp) => {
-                            const listaHotel = resp.data
-                            return listaHotel.filter(
-                                a => a.id === hotel.id
-                            )
-                        })
-    }
+    useEffect(() => {
+        axios(urlAPI)
+            .then((resp) => setListaHotel(resp.data))
+    }, []);
 
-    const atualizarHotel = async(evento) => {
-        const qtdEstrelas = evento.target.value;
-        if (evento.target.value === '') {
-            setListaHotel(infos.listaHotel)
-            return
-        }
-        listaHotel.qtdEstrelas = Number(qtdEstrelas)
-        const listaHoteis = await getHotelCadastrado(listaHotel.qtdEstrelas)
-        if (!Array.isArray(listaHoteis)) return;
-
-        setListaHotel(listaHotel)
-    }
-
-    const renderCards = () => {
+    const renderCards = () => (
         <div className="card-row">
-             {Array.isArray(listaHotel) && listaHotel.length > 0 ?
+            {Array.isArray(listaHotel) && listaHotel.length > 0 ?
             listaHotel.map((hotel) => (
                 <div key={hotel.id} className="card draw-border">
                     <span className="card-titulo">{hotel.nome}</span>
-                    <span className="card-descricao">RA: {hotel.qtdEstrelas}</span>
-                    <span className="card-descricao"> Curso: {hotel.localizacao} </span>
-                    <span className="card-descricao"> Curso: {hotel.qtdQuartos} </span>
-                    <span className="card-descricao"> Curso: {hotel.preco} </span>
+                    <span className="card-descricao">Estrelas: {hotel.qtdEstrelas}</span>
+                    <span className="card-descricao">Localização: {hotel.localizacao}</span>
+                    <span className="card-descricao">Quartos: {hotel.qtdQuartos}</span>
+                    <span className="card-descricao">Preço: R$ {hotel.preco},00</span>
                 </div>
             )) : null}
         </div>
-    }
+    )
 
     return (
         <div className="container home">
@@ -58,6 +43,6 @@ function Home(props) {
             </Main>
         </div>
     )
-}
-
-export default Home
+ }
+ 
+ export default Home
