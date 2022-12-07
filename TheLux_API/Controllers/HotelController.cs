@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using TheLux_API.Data;
 using TheLux_API.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace TheLux_API.Controllers
 {
@@ -26,6 +27,7 @@ namespace TheLux_API.Controllers
         }
 
          [HttpGet("{HotelId}")]
+         [Authorize(Roles = "administrador")]
         public ActionResult<List<Hotel>> Get(int HotelId) {
             try {
                 var result = _context.Hotel.Find(HotelId);

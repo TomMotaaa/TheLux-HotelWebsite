@@ -51,7 +51,7 @@ function Login() {
                         <input 
                             type="text"
                             value={username}
-                            placeholder="username"
+                            placeholder="nome"
                             className="inputAuth"
                             onChange={({target}) => {
                                 setUsername(target.value)
